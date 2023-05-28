@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:padding="20px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#223344"
+    android:id="@+id/linearLayout1">
+    <TextView
+        android:text="Vai gribi būt milionārs?"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:textSize="32dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
+
+    <ImageView
+        android:src="@drawable/title"
+        android:layout_width="wrap_content"
+        android:layout_height="330dp"
+        android:id="@+id/imgTitle"
+        android:padding="10px"
+        android:contentDescription=""/>
+
+    <TextView
+        android:text="Testā jāizvēlas vienu no 4 variantiem"
+        android:textColor="@android:color/white"
+        android:padding="5px"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+ />
+    <Button
+        android:text="Sākt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnStart" />
+</LinearLayout>
