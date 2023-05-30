@@ -34,11 +34,17 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1"
- />
+        android:id="@+id/textView1" />
     <Button
         android:text="Sākt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnStart" />
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTest" />
+
 </LinearLayout>

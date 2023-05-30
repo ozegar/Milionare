@@ -10840,73 +10840,76 @@ namespace Milionare
 			public const int txtJautView = 2131231209;
 			
 			// aapt resource value: 0x7F0801EA
-			public const int @unchecked = 2131231210;
+			public const int txtTest = 2131231210;
 			
 			// aapt resource value: 0x7F0801EB
-			public const int uniform = 2131231211;
+			public const int @unchecked = 2131231211;
 			
 			// aapt resource value: 0x7F0801EC
-			public const int unlabeled = 2131231212;
+			public const int uniform = 2131231212;
 			
 			// aapt resource value: 0x7F0801ED
-			public const int up = 2131231213;
+			public const int unlabeled = 2131231213;
 			
 			// aapt resource value: 0x7F0801EE
-			public const int useLogo = 2131231214;
+			public const int up = 2131231214;
 			
 			// aapt resource value: 0x7F0801EF
-			public const int vertical_only = 2131231215;
+			public const int useLogo = 2131231215;
 			
 			// aapt resource value: 0x7F0801F0
-			public const int view_offset_helper = 2131231216;
+			public const int vertical_only = 2131231216;
 			
 			// aapt resource value: 0x7F0801F1
-			public const int view_transition = 2131231217;
+			public const int view_offset_helper = 2131231217;
 			
 			// aapt resource value: 0x7F0801F2
-			public const int view_tree_lifecycle_owner = 2131231218;
+			public const int view_transition = 2131231218;
 			
 			// aapt resource value: 0x7F0801F3
-			public const int view_tree_on_back_pressed_dispatcher_owner = 2131231219;
+			public const int view_tree_lifecycle_owner = 2131231219;
 			
 			// aapt resource value: 0x7F0801F4
-			public const int view_tree_saved_state_registry_owner = 2131231220;
+			public const int view_tree_on_back_pressed_dispatcher_owner = 2131231220;
 			
 			// aapt resource value: 0x7F0801F5
-			public const int view_tree_view_model_store_owner = 2131231221;
+			public const int view_tree_saved_state_registry_owner = 2131231221;
 			
 			// aapt resource value: 0x7F0801F6
-			public const int visible = 2131231222;
+			public const int view_tree_view_model_store_owner = 2131231222;
 			
 			// aapt resource value: 0x7F0801F7
-			public const int visible_removing_fragment_view_tag = 2131231223;
+			public const int visible = 2131231223;
 			
 			// aapt resource value: 0x7F0801F8
-			public const int west = 2131231224;
-			
-			// aapt resource value: 0x7F0801FB
-			public const int withinBounds = 2131231227;
+			public const int visible_removing_fragment_view_tag = 2131231224;
 			
 			// aapt resource value: 0x7F0801F9
-			public const int withText = 2131231225;
-			
-			// aapt resource value: 0x7F0801FA
-			public const int with_icon = 2131231226;
+			public const int west = 2131231225;
 			
 			// aapt resource value: 0x7F0801FC
-			public const int wrap = 2131231228;
+			public const int withinBounds = 2131231228;
+			
+			// aapt resource value: 0x7F0801FA
+			public const int withText = 2131231226;
+			
+			// aapt resource value: 0x7F0801FB
+			public const int with_icon = 2131231227;
 			
 			// aapt resource value: 0x7F0801FD
-			public const int wrap_content = 2131231229;
+			public const int wrap = 2131231229;
 			
 			// aapt resource value: 0x7F0801FE
-			public const int wrap_content_constrained = 2131231230;
+			public const int wrap_content = 2131231230;
 			
 			// aapt resource value: 0x7F0801FF
-			public const int x_left = 2131231231;
+			public const int wrap_content_constrained = 2131231231;
 			
 			// aapt resource value: 0x7F080200
-			public const int x_right = 2131231232;
+			public const int x_left = 2131231232;
+			
+			// aapt resource value: 0x7F080201
+			public const int x_right = 2131231233;
 			
 			static Id()
 			{
@@ -11546,10 +11549,16 @@ namespace Milionare
 			public const int ic_launcher = 2131558400;
 			
 			// aapt resource value: 0x7F0D0001
-			public const int ic_launcher_foreground = 2131558401;
+			public const int ic_launcher_background = 2131558401;
 			
 			// aapt resource value: 0x7F0D0002
-			public const int ic_launcher_round = 2131558402;
+			public const int ic_launcher_foreground = 2131558402;
+			
+			// aapt resource value: 0x7F0D0003
+			public const int ic_launcher_monochrome = 2131558403;
+			
+			// aapt resource value: 0x7F0D0004
+			public const int ic_launcher_round = 2131558404;
 			
 			static Mipmap()
 			{
