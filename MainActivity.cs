@@ -60,7 +60,7 @@ namespace Milionare
                         source.CopyTo(destination);
                     }
                 }
-
+                Preferences.Set("KeepGoing", "1");  //Default globālā inicializācija, lai for ciklā būtu jau vērtība!
                 try
                 {
                     if (File.Exists(pathToDB))
@@ -70,8 +70,8 @@ namespace Milionare
                         //GetData("select * from test");
                         //SELECT * FROM questansw where lvl=1 ORDER BY RANDOM() LIMIT 1;
                         Android.Content.Intent frm = new Android.Content.Intent(this, typeof(QuestionActivity));
-                        for (var i = 1; i < 10; i++)    // && Intent.GetStringExtra("Continue") != "false"
-                        {
+                        for (var i = 10; i > 0 && Preferences.Get("KeepGoing", "1") == "1"; i--)    // && Intent.GetStringExtra("Continue") != "false"
+                        {   //mainu ciklu otradi, jo vispirms izpildas viss onCreate un tikai tad attēlo intentus!
                             frm.PutExtra("filter", i.ToString());
                             GetData("SELECT * FROM questansw where lvl=@lvl ORDER BY RANDOM() LIMIT 1;", "lvl", i.ToString());
                             frm.PutExtra("jautajums", Jaut);
@@ -114,7 +114,7 @@ namespace Milionare
 
         public void GetData(string SQL, string ParamName, string ParamValue)   //, string ParamName, string ParamValue
         {
-            string data = "";
+            //string data = "";
             try
             {
                 using (var dbConn = new SqliteConnection(connectionString))

@@ -50,7 +50,8 @@ namespace Milionare.Properties
             //btnB.SetWidth(wdt);
             //btnC.SetWidth(wdt);
             //btnD.SetWidth(wdt);
-            txtJautView.Text = Intent.GetStringExtra("jautajums");
+            var iLvl = Intent.GetStringExtra("filter"); //jasaprot lvl un vai tiesam katru reizi for cikls izpildas 10 reizes? - slikti
+            txtJautView.Text = iLvl.ToString() +". "+ Intent.GetStringExtra("jautajums");
             btnA.Text = "A: " + Intent.GetStringExtra("A");
             btnB.Text = "B: " + Intent.GetStringExtra("B");
             btnC.Text = "C: " + Intent.GetStringExtra("C");
@@ -128,7 +129,7 @@ namespace Milionare.Properties
                         //bool result = await AlertAsync(this, "My Title", "My Message", "Yes", "No");
                         //displayAlertDialogBox(1);
                         //Finish();
-                        Toast.MakeText(this, "Positive answer", ToastLength.Long).Show();
+                        //Toast.MakeText(this, "Positive answer", ToastLength.Long).Show();
                         switch (poga)
                         {       ////SetBackgroundColor(Android.Graphics.Color.Green);
                             case "1":
@@ -148,9 +149,9 @@ namespace Milionare.Properties
                                 break;
                         }
                         //Notify();
-                        Wait(300);
-                        Preferences.Set("EndVal", "1");   //Preferences.Get("MyData", "MyDataValue");
-                        //Finish();
+                        //Wait(300);    //bloķē un var uzkārt, iztiksim bez
+                        Preferences.Set("KeepGoing", "1");   //Preferences.Get("MyData", "MyDataValue");
+                        Finish();
                     }
                     else
                     {   //kļūdaina atbilde - spēle zaudēta
@@ -158,10 +159,11 @@ namespace Milionare.Properties
                         //Android.Content.Intent frm = new Android.Content.Intent(this, typeof(MainActivity));
                         //frm.PutExtra("Continue", "false");
                         //SetContentView(Resource.Layout.activity_main);
-                        string level = base.Intent.GetStringExtra("filter");
-                        // int level1 = (int)level * 100;
-                        //level = level1.ToString();
-                        Preferences.Set("EndVal", "0");
+                        var level = Intent.GetStringExtra("filter"); //base.
+                        //var iLev = level - 1; //nesanāk konvertācija
+                        // int level1 = (int)level * 100;   //skaita nepareizi(otradak)
+                        //level = level1.ToString();        //1000 - level1
+                        Preferences.Set("KeepGoing", "0");
                         string rezult = $"Apsveicu Jūsu rezultāts sasniedza {level}00$!";
                         ShowResult(rezult);
                         //Intent intent = new Intent(this, typeof(Activity2));
@@ -172,7 +174,7 @@ namespace Milionare.Properties
                 });
                 alertDialog.SetNegativeButton("NĒ", (s, o) =>
                 {   //vajag #D7D7D7 //@color/button_material_light
-                    Toast.MakeText(this, "Negative answer", ToastLength.Long).Show();
+                    //Toast.MakeText(this, "Negative answer", ToastLength.Long).Show();
                     btnA.Background.SetColorFilter(Android.Graphics.Color.LightBlue, Android.Graphics.PorterDuff.Mode.Multiply);
                     btnB.Background.SetColorFilter(Android.Graphics.Color.LightBlue, Android.Graphics.PorterDuff.Mode.Multiply);
                     btnC.Background.SetColorFilter(Android.Graphics.Color.LightBlue, Android.Graphics.PorterDuff.Mode.Multiply);
@@ -189,14 +191,18 @@ namespace Milionare.Properties
             }
         }
 
-        private void ShowResult(string rez)
+        private void ShowResult(string rez) //$o labak izsaukt no MainActivity, lai kontroletu testa beigas un ar Back pogu neturpinātu testu
         {
             LinearLayout ll = new LinearLayout(this);
             var lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent,
                 LinearLayout.LayoutParams.MatchParent);
+            ll.LayoutParameters = lp;
+            ll.SetPadding(20,20,20,20);
+            ll.SetBackgroundColor(Android.Graphics.Color.LightBlue);
             TextView tv = new TextView(this);
             tv.LayoutParameters = lp;
             //tv.TextSize = "20dp";
+            //tv.SetTextSize(Android.Util.ComplexUnitType, "20dp");
             tv.Text = rez;
             ll.AddView(tv);
             SetContentView(ll);
