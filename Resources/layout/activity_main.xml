@@ -10,7 +10,7 @@
     android:background="#223344"
     android:id="@+id/linearLayout1">
     <TextView
-        android:text="Vai gribi būt milionārs?"
+        android:text="Vai gribi būt miljonārs?"
         android:textColor="@android:color/white"
         android:textAlignment="center"
         android:textSize="32dp"
@@ -28,7 +28,7 @@
         android:contentDescription=""/>
 
     <TextView
-        android:text="Testā jāizvēlas vienu no 4 variantiem"
+        android:text="Testā jāizvēlas vienu no 4 variantiem\n izvēlētajos 10 jautājumos "
         android:textColor="@android:color/white"
         android:padding="5px"
         android:textAppearance="?android:attr/textAppearanceLarge"

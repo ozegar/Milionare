@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:minWidth="25px"
     android:minHeight="25px"
@@ -38,6 +39,7 @@
             android:textAlignment="textStart"
             android:layout_marginRight="20px"
             android:layout_width="150dp"
+            app:backgroundTint="@android:color/holo_blue_light"
             android:layout_height="match_parent"
             android:id="@+id/btnA" />
         <Button
@@ -45,6 +47,7 @@
             android:textAlignment="textStart"
             android:layout_marginLeft="20px"
             android:layout_width="150dp"
+            app:backgroundTint="@android:color/holo_blue_light"
             android:layout_height="match_parent"
             android:id="@+id/btnB" />
     </LinearLayout>
@@ -62,6 +65,7 @@
             android:textAlignment="textStart"
             android:layout_marginRight="20px"
             android:layout_width="150dp"
+            app:backgroundTint="@android:color/holo_blue_light"
             android:layout_height="match_parent"
             android:id="@+id/btnC" />
         <Button
@@ -69,6 +73,7 @@
             android:textAlignment="textStart"
             android:layout_marginLeft="20px"
             android:layout_width="150dp"
+            app:backgroundTint="@android:color/holo_blue_light"
             android:layout_height="match_parent"
             android:visibility="invisible"
             android:id="@+id/btnD" />

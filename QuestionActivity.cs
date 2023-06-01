@@ -11,6 +11,8 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
+using static Android.Service.Voice.VoiceInteractionSession;
 using static Java.Text.Normalizer;
 
 namespace Milionare.Properties
@@ -41,13 +43,13 @@ namespace Milionare.Properties
             btnD.Visibility = ViewStates.Visible;
             lJ = FindViewById<LinearLayout>(Resource.Id.linearLayout1);
             //int skaits = lJ.ChildCount;
-            int wi = lJ.Width;
-            int pad = ll.PaddingLeft;
-            int wdt = wi / 2 - 50;
-            btnA.SetWidth(wdt);
-            btnB.SetWidth(wdt);
-            btnC.SetWidth(wdt);
-            btnD.SetWidth(wdt);
+            //int wi = lJ.Width;    //nedarbojas
+            //int pad = ll.PaddingLeft;
+            //int wdt = wi / 2 - 50;
+            //btnA.SetWidth(wdt);
+            //btnB.SetWidth(wdt);
+            //btnC.SetWidth(wdt);
+            //btnD.SetWidth(wdt);
             txtJautView.Text = Intent.GetStringExtra("jautajums");
             btnA.Text = "A: " + Intent.GetStringExtra("A");
             btnB.Text = "B: " + Intent.GetStringExtra("B");
@@ -79,61 +81,29 @@ namespace Milionare.Properties
         private void CheckButton(string poga)
         {
             try
-            {
-                if (poga == Intent.GetStringExtra("Atb"))
-                {   //pareiza atbilde
-
-                    switch (poga)
-                    {       ////SetBackgroundColor(Android.Graphics.Color.Green);
-                        case "1":
-                            btnA.Background.SetColorFilter(Android.Graphics.Color.Orange, Android.Graphics.PorterDuff.Mode.Multiply);
-                            break;
-                        case "2":
-                            btnB.Background.SetColorFilter(Android.Graphics.Color.Orange, Android.Graphics.PorterDuff.Mode.Multiply);
-                            break;
-                        case "3":
-                            btnC.Background.SetColorFilter(Android.Graphics.Color.Orange, Android.Graphics.PorterDuff.Mode.Multiply);
-                            break;
-                        case "4":
-                            btnD.Background.SetColorFilter(Android.Graphics.Color.Orange, Android.Graphics.PorterDuff.Mode.Multiply);
-                            break;
-                        default:
-                            Toast.MakeText(this, "Pieņemu atbildi(pareiza)", ToastLength.Long).Show();
-                            break;
-                    }
-                    //vispirms dialoga logs, ja ok tad neko(turpinām), ja atcelt, tad return un pogas krāsu reset
-                    ShowDialog1(poga);
-                    Notify();
-                    //bool result = await AlertAsync(this, "My Title", "My Message", "Yes", "No");
-                    //displayAlertDialogBox(1);
-                    //Wait(100);
-                    //Finish();
-                    //ja dialog logā yes un tā ir pareiza atbilde
-                    //switch (poga)
-                    //{       ////SetBackgroundColor(Android.Graphics.Color.Green);
-                    //    case "1":
-                    //        btnA.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
-                    //        break;
-                    //    case "2": 
-                    //        btnB.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
-                    //        break;
-                    //    case "3": 
-                    //        btnC.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
-                    //        break;
-                    //    case "4": 
-                    //        btnD.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
-                    //        break;
-                    //    default:    Toast.MakeText(this, "Atbilde ir pareiza", ToastLength.Long).Show();
-                    //        break;
-                    //}
+            {   //sākuma izvēli iekrāso vienmēr
+                switch (poga)
+                {       ////SetBackgroundColor(Android.Graphics.Color.Green);
+                    case "1":
+                        btnA.Background.SetColorFilter(Android.Graphics.Color.Orange, Android.Graphics.PorterDuff.Mode.Multiply);
+                        break;
+                    case "2":
+                        btnB.Background.SetColorFilter(Android.Graphics.Color.Orange, Android.Graphics.PorterDuff.Mode.Multiply);
+                        break;
+                    case "3":
+                        btnC.Background.SetColorFilter(Android.Graphics.Color.Orange, Android.Graphics.PorterDuff.Mode.Multiply);
+                        break;
+                    case "4":
+                        btnD.Background.SetColorFilter(Android.Graphics.Color.Orange, Android.Graphics.PorterDuff.Mode.Multiply);
+                        break;
+                    default:
+                        Toast.MakeText(this, "Pieņemu atbildi(pareiza)", ToastLength.Long).Show();
+                        break;
                 }
-                else
-                {   //kļūdaina atbilde - spēle zaudēta
-                    Toast.MakeText(this, "kļūdaina atbilde", ToastLength.Long).Show();
-                    //Android.Content.Intent frm = new Android.Content.Intent(this, typeof(MainActivity));
-                    //frm.PutExtra("Continue", "false");
-                    SetContentView(Resource.Layout.activity_main);
-                }
+                //vispirms dialoga logs, ja ok tad neko(turpinām), ja atcelt, tad return un pogas krāsu reset
+                ShowDialog1(poga);
+                Notify();
+                
                 Finish();
             }
             catch (Exception e)
@@ -147,67 +117,67 @@ namespace Milionare.Properties
         {
             try
             {
-                //var menuItems = new string[]
-                //         {"Show file", "Show file in seperate form", "Delete file", "Share file" };
-
-                //EventHandler<DialogClickEventArgs> handler = (s, o) =>  //s = sender
-                //{
-                    //var msg = menuItems[o.Which];
-                    //Toast.MakeText(this, msg, ToastLength.Long).Show();
-                    //switch (o.Which)
-                    //{
-                    //    case 0: //show file
-                    //            //                       ShowFile(filename);
-                    //        break;
-                    //    case 1: //Show file in seperate form
-                    //            //                        ShowFile2(filename);
-                    //        break;
-                    //    case 2: //Delete file
-                    //            //                        DeleteFile(filename);
-                    //        break;
-                    //    case 3: //Share
-                    //            //                        ShareFile(filename);
-                    //        break;
-                    //    default: break;
-                    //}
-                //};
                 Android.App.AlertDialog.Builder alertDialog =
             new Android.App.AlertDialog.Builder(this);
                 alertDialog.SetTitle("Vai esi pārliecināts par atbildi");
                 //alertDialog.SetItems(menuItems, handler);
                 alertDialog.SetPositiveButton("JĀ", (s, o) =>
                 {
-                    Toast.MakeText(this, "Positive answer", ToastLength.Long).Show();
-                    switch (poga)
-                    {       ////SetBackgroundColor(Android.Graphics.Color.Green);
-                        case "1":
-                            btnA.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
-                            break;
-                        case "2":
-                            btnB.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
-                            break;
-                        case "3":
-                            btnC.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
-                            break;
-                        case "4":
-                            btnD.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
-                            break;
-                        default:
-                            Toast.MakeText(this, "Atbilde ir pareiza", ToastLength.Long).Show();
-                            break;
+                    if (poga == base.Intent.GetStringExtra("Atb"))
+                    {   //pareiza atbilde
+                        //bool result = await AlertAsync(this, "My Title", "My Message", "Yes", "No");
+                        //displayAlertDialogBox(1);
+                        //Finish();
+                        Toast.MakeText(this, "Positive answer", ToastLength.Long).Show();
+                        switch (poga)
+                        {       ////SetBackgroundColor(Android.Graphics.Color.Green);
+                            case "1":
+                                btnA.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
+                                break;
+                            case "2":
+                                btnB.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
+                                break;
+                            case "3":
+                                btnC.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
+                                break;
+                            case "4":
+                                btnD.Background.SetColorFilter(Android.Graphics.Color.Green, Android.Graphics.PorterDuff.Mode.Multiply);
+                                break;
+                            default:
+                                Toast.MakeText(this, "Atbilde ir pareiza", ToastLength.Long).Show();
+                                break;
+                        }
+                        //Notify();
+                        Wait(300);
+                        Preferences.Set("EndVal", "1");   //Preferences.Get("MyData", "MyDataValue");
+                        //Finish();
                     }
-                    Finish();
+                    else
+                    {   //kļūdaina atbilde - spēle zaudēta
+                        Toast.MakeText(this, "kļūdaina atbilde", ToastLength.Long).Show();
+                        //Android.Content.Intent frm = new Android.Content.Intent(this, typeof(MainActivity));
+                        //frm.PutExtra("Continue", "false");
+                        //SetContentView(Resource.Layout.activity_main);
+                        string level = base.Intent.GetStringExtra("filter");
+                        // int level1 = (int)level * 100;
+                        //level = level1.ToString();
+                        Preferences.Set("EndVal", "0");
+                        string rezult = $"Apsveicu Jūsu rezultāts sasniedza {level}00$!";
+                        ShowResult(rezult);
+                        //Intent intent = new Intent(this, typeof(Activity2));
+                        //intent.PutExtra("imgURL", t.ImageUrl);
+                        //StartActivity(intent);
+                    }
+
                 });
                 alertDialog.SetNegativeButton("NĒ", (s, o) =>
-                {
+                {   //vajag #D7D7D7 //@color/button_material_light
                     Toast.MakeText(this, "Negative answer", ToastLength.Long).Show();
+                    btnA.Background.SetColorFilter(Android.Graphics.Color.LightBlue, Android.Graphics.PorterDuff.Mode.Multiply);
+                    btnB.Background.SetColorFilter(Android.Graphics.Color.LightBlue, Android.Graphics.PorterDuff.Mode.Multiply);
+                    btnC.Background.SetColorFilter(Android.Graphics.Color.LightBlue, Android.Graphics.PorterDuff.Mode.Multiply);
+                    btnD.Background.SetColorFilter(Android.Graphics.Color.LightBlue, Android.Graphics.PorterDuff.Mode.Multiply);
                 });
-                //alertDialog.SetNeutralButton("Iziet",
-                //    (sender, args) =>
-                //    {
-                //        Toast.MakeText(this, "Positive answer", ToastLength.Long).Show();
-                //        //alertDialog.Dispose();
-                //    });
                 //alertDialog.Wait();
                 //alertDialog.NotifyAll();
                 alertDialog.Show();
@@ -217,6 +187,19 @@ namespace Milionare.Properties
                 Toast.MakeText(this, e.Message, ToastLength.Long).Show();
                 //throw;
             }
+        }
+
+        private void ShowResult(string rez)
+        {
+            LinearLayout ll = new LinearLayout(this);
+            var lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent,
+                LinearLayout.LayoutParams.MatchParent);
+            TextView tv = new TextView(this);
+            tv.LayoutParameters = lp;
+            //tv.TextSize = "20dp";
+            tv.Text = rez;
+            ll.AddView(tv);
+            SetContentView(ll);
         }
 
         public Task<bool> AlertAsync(Context context, string title, string message, string positiveButtonTxt, string negativeButtonTxt)
