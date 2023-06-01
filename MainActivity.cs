@@ -51,6 +51,8 @@ namespace Milionare
                 //kopēt uz external un atvērt DB
                 var folders = this.GetExternalMediaDirs();
                 var FolderPath = folders[0].AbsolutePath;
+                Android.Content.Intent frm = new Android.Content.Intent(this, typeof(QuestionActivity));
+                frm.PutExtra("FolderPath", FolderPath);
                 pathToDB = Path.Combine(FolderPath, "million.db");
                 connectionString = $"Data Source={pathToDB}"; //bez ;
                 using (var source = Resources.OpenRawResource(Resource.Raw.million))
@@ -69,10 +71,9 @@ namespace Milionare
                         //string SQLDB= "select * from test where first_name like @param"
                         //GetData("select * from test");
                         //SELECT * FROM questansw where lvl=1 ORDER BY RANDOM() LIMIT 1;
-                        Android.Content.Intent frm = new Android.Content.Intent(this, typeof(QuestionActivity));
                         for (var i = 10; i > 0 && Preferences.Get("KeepGoing", "1") == "1"; i--)    // && Intent.GetStringExtra("Continue") != "false"
                         {   //mainu ciklu otradi, jo vispirms izpildas viss onCreate un tikai tad attēlo intentus!
-                            frm.PutExtra("filter", i.ToString());
+                            frm.PutExtra("filter", i);  //.ToString()
                             GetData("SELECT * FROM questansw where lvl=@lvl ORDER BY RANDOM() LIMIT 1;", "lvl", i.ToString());
                             frm.PutExtra("jautajums", Jaut);
                             frm.PutExtra("A", A);

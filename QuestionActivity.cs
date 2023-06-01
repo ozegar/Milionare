@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Icu.Text;
+//using Android.Media;  //konflikts ar Orientation.Vertical
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -23,6 +24,7 @@ namespace Milionare.Properties
         TextView txtJautView;
         Button btnA, btnB, btnC, btnD;
         LinearLayout lJ;
+        String pathToRez;   //FolderPath
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -50,7 +52,7 @@ namespace Milionare.Properties
             //btnB.SetWidth(wdt);
             //btnC.SetWidth(wdt);
             //btnD.SetWidth(wdt);
-            var iLvl = Intent.GetStringExtra("filter"); //jasaprot lvl un vai tiesam katru reizi for cikls izpildas 10 reizes? - slikti
+            var iLvl = Intent.GetIntExtra("filter",0); //jasaprot lvl un vai tiesam katru reizi for cikls izpildas 10 reizes? - slikti
             txtJautView.Text = iLvl.ToString() +". "+ Intent.GetStringExtra("jautajums");
             btnA.Text = "A: " + Intent.GetStringExtra("A");
             btnB.Text = "B: " + Intent.GetStringExtra("B");
@@ -159,12 +161,14 @@ namespace Milionare.Properties
                         //Android.Content.Intent frm = new Android.Content.Intent(this, typeof(MainActivity));
                         //frm.PutExtra("Continue", "false");
                         //SetContentView(Resource.Layout.activity_main);
-                        var level = Intent.GetStringExtra("filter"); //base.
-                        //var iLev = level - 1; //nesanāk konvertācija
+                        //var level = Intent.GetStringExtra("filter"); //base.
+                        var level = Intent.GetIntExtra("filter",0); //base.
+                        level = (int)((double)level - 1)*100;
                         // int level1 = (int)level * 100;   //skaita nepareizi(otradak)
                         //level = level1.ToString();        //1000 - level1
                         Preferences.Set("KeepGoing", "0");
-                        string rezult = $"Apsveicu Jūsu rezultāts sasniedza {level}00$!";
+                        string rezult = $"Apsveicu Jūsu rezultāts sasniedza {level.ToString()}€!";
+                        pathToRez = System.IO.Path.Combine(Intent.GetStringExtra("FolderPath"), "rezult.txt"); 
                         ShowResult(rezult);
                         //Intent intent = new Intent(this, typeof(Activity2));
                         //intent.PutExtra("imgURL", t.ImageUrl);
@@ -195,17 +199,43 @@ namespace Milionare.Properties
         {
             LinearLayout ll = new LinearLayout(this);
             var lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent,
-                LinearLayout.LayoutParams.MatchParent);
-            ll.LayoutParameters = lp;
+                LinearLayout.LayoutParams.MatchParent); //izsmērē vienu objektu pa visu ekrānu
+            //ll.LayoutParameters = lp;
             ll.SetPadding(20,20,20,20);
-            ll.SetBackgroundColor(Android.Graphics.Color.LightBlue);
-            TextView tv = new TextView(this);
-            tv.LayoutParameters = lp;
-            //tv.TextSize = "20dp";
-            //tv.SetTextSize(Android.Util.ComplexUnitType, "20dp");
-            tv.Text = rez;
+            ll.SetBackgroundColor(Android.Graphics.Color.Rgb(22,33,44));
+            ll.Orientation = Orientation.Vertical;
+            TextView tv = new TextView(this)
+            {
+                //LayoutParameters = lp,
+                //tv.TextSize = "32dp";
+                //tv.SetTextSize(Android.Util.ComplexUnitType, "20dp");
+                TextAlignment = TextAlignment.Center,
+                TextSize = 32,
+                //TextColors = "white",
+                Text = rez
+            };
             ll.AddView(tv);
-            SetContentView(ll);
+            Button btn = new Button(this);
+            Button btn2 = new Button(this);
+            //btn.LayoutParameters = lp;
+            btn.Text = "\nDalīties ar rezultātu\n"; //rez + "\n 
+            btn.SetHeight(70);
+            btn2.Text = "\nAtkārtot testu\n";
+            ll.AddView(btn);
+            ll.AddView(btn2);
+            btn.Click += async delegate    //(s, e)  =>
+            {
+                await Share.RequestAsync(new ShareFileRequest
+                {
+                    Title = rez,
+                    File = new ShareFile(pathToRez)
+                });
+            };
+            btn2.Click += (s, e) =>
+            {
+                Finish();
+            };
+                SetContentView(ll);
         }
 
         public Task<bool> AlertAsync(Context context, string title, string message, string positiveButtonTxt, string negativeButtonTxt)
